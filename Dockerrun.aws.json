@@ -1,0 +1,15 @@
+{
+    "AWSEBDockerrunVersion": "1",
+    "Ports": [
+        {
+            "ContainerPort": "80"
+        }
+    ],
+    "Volumes": [
+        {
+            "HostDirectory": "/dev/shm",
+            "ContainerDirectory": "/dev/shm"
+        }
+    ],
+    "Logging": "/var/eb_log"
+}

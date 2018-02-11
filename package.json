@@ -1,0 +1,20 @@
+{
+  "name": "generate-pdf",
+  "version": "0.0.1",
+  "dependencies": {
+    "aws-sdk": "^2.188.0",
+    "body-parser": "^1.18.2",
+    "chrome-launcher": "^0.10.2",
+    "chrome-remote-interface": "^0.25.5",
+    "cors": "^2.8.4",
+    "express": "^4.16.2"
+  },
+  "devDependencies": {
+    "bestzip": "^1.1.4"
+  },
+  "author": "Amarildo Kurtaj(amarildo.kurtaj@telenet.be)",
+  "scripts": {
+    "zip": "bestzip generate-pdf.zip src Dockerfile .dockerignore Dockerrun.aws.json .ebextensions package-lock.json package.json ",
+    "localTest": "NODE_ENV=local lambda-local -f lib/index -e localEvent.json -t 300"
+  }
+}
