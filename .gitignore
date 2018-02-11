@@ -5,10 +5,4 @@ yarn.lock
 build.zip
 lib/
 
-test/
-
-reporting/
-
-clippings/
-
 generate-pdf\.zip

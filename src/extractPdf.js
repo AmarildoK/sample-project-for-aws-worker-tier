@@ -22,6 +22,7 @@ const defaultPrintOptions = {
 async function extractCampaignPdf(url, printOptions) {
     printOptions = printOptions || {};
 
+    //connect to chrome
     const client = await CDP({port: 9222});
 
     try {
@@ -31,7 +32,7 @@ async function extractCampaignPdf(url, printOptions) {
         await Page.navigate({ url });
         await Page.loadEventFired();
 
-        //dirty fix to let images be loaded first after even fired
+        //dirty fix to let images be loaded first after event fired
         await wait(5000);
         const { data } = await Page.printToPDF(Object.assign(defaultPrintOptions, printOptions));
 

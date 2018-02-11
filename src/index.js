@@ -26,17 +26,20 @@ let router = express.Router();
 
 router.post('/',
     async function (req, res) {
+
+        //Disable express timeout
+        //
         req.setTimeout(0);
 
-        let data = req.body;
-
+        //Wait for chrome to launch
         const chrome = await chromeLauncher.launch(chromeConfig)
         
+        //extract data from post object
         const { url, timestamp, printOptions } = data;
         const bucket = data.bucket;
-        const campaign = data.campaign;
-        const user = data.user;
+        let data = req.body;
 
+        //extract pdf and return as buffer
         const pdfBuffer = await extractCampaignPdf(url, printOptions);
 
         let config = {
@@ -47,6 +50,8 @@ router.post('/',
             }
         };
 
+        // save pdf to s3 or locally depending on the 
+        // NODE_ENV enviorment variable
         const pdfSaveRes = await saveObject(pdfBuffer, bucket.name, `${bucket.path}/${bucket.key}.pdf`, config);
 
         const resData = {
